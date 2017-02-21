@@ -20,11 +20,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
 
         // Initialization code
     }
-    
-    func populateWithData(_ data: WatchModel)
-    {
-        imageInCell.image = data.image
-    }
+
     // function to handle the tap on the heartButton
     func heartButtonTapped(sender: UIButton) {
         

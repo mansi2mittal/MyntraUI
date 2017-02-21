@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import AlamofireImage
+import SwiftyJSON
 
 
 class ViewController: UIViewController {
     
-    var arrayOfWatchesImages = [ #imageLiteral(resourceName: "Image-2"), #imageLiteral(resourceName: "Image-3"),#imageLiteral(resourceName: "Image-4"),#imageLiteral(resourceName: "Image-5"), #imageLiteral(resourceName: "Image-6"), #imageLiteral(resourceName: "Image-7"), #imageLiteral(resourceName: "Image-8"),#imageLiteral(resourceName: "Image-9"), #imageLiteral(resourceName: "Image-10"), #imageLiteral(resourceName: "Image-11"), #imageLiteral(resourceName: "Image-12"), #imageLiteral(resourceName: "Image-13"), #imageLiteral(resourceName: "Image-14")]
+    //var arrayOfWatchesImages = [ #imageLiteral(resourceName: "Image-2"), #imageLiteral(resourceName: "Image-3"),#imageLiteral(resourceName: "Image-4"),#imageLiteral(resourceName: "Image-5"), #imageLiteral(resourceName: "Image-6"), #imageLiteral(resourceName: "Image-7"), #imageLiteral(resourceName: "Image-8"),#imageLiteral(resourceName: "Image-9"), #imageLiteral(resourceName: "Image-10"), #imageLiteral(resourceName: "Image-11"), #imageLiteral(resourceName: "Image-12"), #imageLiteral(resourceName: "Image-13"), #imageLiteral(resourceName: "Image-14")]
     
    // CREATING A 2D ARRAY OF THE INDEXPATH OF THE CELLS OF THE TABLEVIEW AS WELL AS TEH COLLECTION VIEW THAT HAVE bBEN SELECTED AS FAVOURITE BY THE USER BY TAPPING ON THE HEART BUTTON
     
@@ -27,6 +29,8 @@ class ViewController: UIViewController {
     
     // ARRAY OF THE INDEXPATH OF TEH ROWS THAT ARE BEEN SELECTED TO MINIMIZE IN A SECTION
     var arrayOfHiddenRowsOfSection = [Int]()
+    
+    var imagesList = [ImageInfo]()
     
     // OUTLETS
     @IBOutlet weak var viewOnTop: UIImageView!
@@ -98,6 +102,17 @@ class ViewController: UIViewController {
      guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCellTableViewCellID", for: indexPath) as? tableViewCellTableViewCell else {
                 fatalError(" Cell Not Found")
             }
+        
+        
+        Webservices().fetchDataFromPixabay(withQuery: "dogs", success: { (images : [ImageInfo]) in
+            
+            self.imagesList = images
+            cell.watchCollectionView.reloadData()
+            
+        }) { (error : Error) in
+            
+        }
+
     // EACH TIME THE CELL IS LOADED CHECKING WHETHER THE PARTICULAR ROW IS ALREADY SELECTED FOR MINIMIZING TO PERSIST THE MINIMIZATION
         
      if(arrayOfMinimizedRows.contains(indexPath)){
@@ -213,7 +228,7 @@ class ViewController: UIViewController {
     
      func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return arrayOfWatchesImages.count
+        return imagesList.count
     }
     
     // RETURNS THE CELL FOR ITEM AT INDEXPATH
@@ -224,11 +239,16 @@ class ViewController: UIViewController {
             fatalError(" cell not Found")
         }
         
+        if let url = URL(string: imagesList[indexPath.item].previewURL) {
+            
+            cell.imageInCell.af_setImage(withURL : url)
+        }
+        
+        cell.imageInCell.contentMode = .scaleAspectFill
+        
+
+        
         // POULATING DATA INTO THE CELLS
-        
-        let configuredCell = WatchModel(withData: [arrayOfWatchesImages[indexPath.item]])
-        
-        cell.populateWithData(configuredCell)
         cell.layer.borderWidth = 5
         cell.layer.borderColor = UIColor.black.cgColor
         
@@ -249,7 +269,7 @@ class ViewController: UIViewController {
         
         ZoomedView.zoomImg = selectedCell.imageInCell.image
         
-        UIView.animate(withDuration: 1.0 , delay: 0.0, options: .curveEaseInOut, animations:
+        UIView.animate(withDuration: 0.1 , delay: 0.0, options: .curveEaseInOut, animations:
             {  self.navigationController?.pushViewController(ZoomedView, animated: true)
                 UIView.setAnimationTransition(UIViewAnimationTransition.flipFromRight, for: self.navigationController!.view! , cache: false)
             }, completion:nil )
@@ -296,19 +316,6 @@ class ViewController: UIViewController {
 
 // MARK: NAVIGATION
 
-class WatchModel {
-    
-      var image  : UIImage!
-    
-       init(withData imagesArrayOfWatches : [UIImage]) {
-        
-        for index in imagesArrayOfWatches.indices
-            {
-            image = imagesArrayOfWatches[index]
-        
-    }
-  }
-}
 
 
 

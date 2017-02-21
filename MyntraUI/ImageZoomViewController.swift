@@ -41,10 +41,7 @@ import UIKit
     
     // function to populate data 
     
-    func populateWithData(_ data: WatchModel)
-    {
-        zoomedImage.image = data.image
-    }
+ 
     
     
 

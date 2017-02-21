@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C1624511E5C90260086B04A /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1624501E5C90260086B04A /* NetworkController.swift */; };
+		0C1624531E5C90340086B04A /* webservices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1624521E5C90340086B04A /* webservices.swift */; };
+		0C1624551E5C90420086B04A /* ImageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1624541E5C90420086B04A /* ImageInfo.swift */; };
 		0C1FA85C1E55CD2200991A8C /* ImageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1FA85B1E55CD2200991A8C /* ImageZoomViewController.swift */; };
 		0C32CC741E55782000A04941 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C32CC731E55782000A04941 /* AppDelegate.swift */; };
 		0C32CC761E55782000A04941 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C32CC751E55782000A04941 /* ViewController.swift */; };
@@ -20,9 +23,13 @@
 		0CF309B01E58270900DD0C9F /* extensionUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF309AF1E58270900DD0C9F /* extensionUI.swift */; };
 		0CFE557F1E5598D800EF0E57 /* headerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CFE557E1E5598D800EF0E57 /* headerView.xib */; };
 		0CFE55811E55991000EF0E57 /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFE55801E55991000EF0E57 /* headerView.swift */; };
+		DF65E0D691F1ABA1DDE127B1 /* Pods_MyntraUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DBEA0B696E9B338F645E3BB /* Pods_MyntraUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C1624501E5C90260086B04A /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		0C1624521E5C90340086B04A /* webservices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = webservices.swift; sourceTree = "<group>"; };
+		0C1624541E5C90420086B04A /* ImageInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageInfo.swift; sourceTree = "<group>"; };
 		0C1FA85B1E55CD2200991A8C /* ImageZoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageZoomViewController.swift; sourceTree = "<group>"; };
 		0C32CC701E55782000A04941 /* MyntraUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyntraUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C32CC731E55782000A04941 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +45,9 @@
 		0CF309AF1E58270900DD0C9F /* extensionUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensionUI.swift; sourceTree = "<group>"; };
 		0CFE557E1E5598D800EF0E57 /* headerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = headerView.xib; sourceTree = "<group>"; };
 		0CFE55801E55991000EF0E57 /* headerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = headerView.swift; sourceTree = "<group>"; };
+		7DBEA0B696E9B338F645E3BB /* Pods_MyntraUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyntraUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A676F0C4C7B4F459D7972904 /* Pods-MyntraUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyntraUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyntraUI/Pods-MyntraUI.debug.xcconfig"; sourceTree = "<group>"; };
+		C6E13A7EA420DA8AE1ED3E66 /* Pods-MyntraUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyntraUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyntraUI/Pods-MyntraUI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF65E0D691F1ABA1DDE127B1 /* Pods_MyntraUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +67,8 @@
 			children = (
 				0C32CC721E55782000A04941 /* MyntraUI */,
 				0C32CC711E55782000A04941 /* Products */,
+				13F38BE35D770CCB7BAAD9F6 /* Pods */,
+				49E9EFC401ED437F0EB7DE74 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,6 +85,9 @@
 			children = (
 				0C32CC731E55782000A04941 /* AppDelegate.swift */,
 				0C32CC751E55782000A04941 /* ViewController.swift */,
+				0C1624501E5C90260086B04A /* NetworkController.swift */,
+				0C1624521E5C90340086B04A /* webservices.swift */,
+				0C1624541E5C90420086B04A /* ImageInfo.swift */,
 				0CF309AF1E58270900DD0C9F /* extensionUI.swift */,
 				0CFE55801E55991000EF0E57 /* headerView.swift */,
 				0C1FA85B1E55CD2200991A8C /* ImageZoomViewController.swift */,
@@ -88,6 +104,23 @@
 			path = MyntraUI;
 			sourceTree = "<group>";
 		};
+		13F38BE35D770CCB7BAAD9F6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A676F0C4C7B4F459D7972904 /* Pods-MyntraUI.debug.xcconfig */,
+				C6E13A7EA420DA8AE1ED3E66 /* Pods-MyntraUI.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		49E9EFC401ED437F0EB7DE74 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7DBEA0B696E9B338F645E3BB /* Pods_MyntraUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -95,9 +128,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0C32CC821E55782000A04941 /* Build configuration list for PBXNativeTarget "MyntraUI" */;
 			buildPhases = (
+				07CD90F46770D2F5F8B404C8 /* [CP] Check Pods Manifest.lock */,
 				0C32CC6C1E55782000A04941 /* Sources */,
 				0C32CC6D1E55782000A04941 /* Frameworks */,
 				0C32CC6E1E55782000A04941 /* Resources */,
+				2CFC8AC09DD2680693FF33FC /* [CP] Embed Pods Frameworks */,
+				6CD40306126525AC22A36B60 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -158,17 +194,68 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		07CD90F46770D2F5F8B404C8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		2CFC8AC09DD2680693FF33FC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyntraUI/Pods-MyntraUI-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6CD40306126525AC22A36B60 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyntraUI/Pods-MyntraUI-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0C32CC6C1E55782000A04941 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C1624511E5C90260086B04A /* NetworkController.swift in Sources */,
+				0C1624551E5C90420086B04A /* ImageInfo.swift in Sources */,
 				0CFE55811E55991000EF0E57 /* headerView.swift in Sources */,
 				0C32CC761E55782000A04941 /* ViewController.swift in Sources */,
 				0C32CC8B1E55857C00A04941 /* ImageCollectionViewCell.swift in Sources */,
 				0C1FA85C1E55CD2200991A8C /* ImageZoomViewController.swift in Sources */,
 				0C32CC8F1E558CE200A04941 /* tableViewCellTableViewCell.swift in Sources */,
 				0C32CC741E55782000A04941 /* AppDelegate.swift in Sources */,
+				0C1624531E5C90340086B04A /* webservices.swift in Sources */,
 				0CF309B01E58270900DD0C9F /* extensionUI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,6 +377,7 @@
 		};
 		0C32CC831E55782000A04941 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A676F0C4C7B4F459D7972904 /* Pods-MyntraUI.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MyntraUI/Info.plist;
@@ -302,6 +390,7 @@
 		};
 		0C32CC841E55782000A04941 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C6E13A7EA420DA8AE1ED3E66 /* Pods-MyntraUI.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MyntraUI/Info.plist;
