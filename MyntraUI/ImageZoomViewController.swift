@@ -16,8 +16,12 @@ import UIKit
     
     var imageURL : URL!
     
+    var zoomImg : UIImage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        zoomedImage.image = zoomImg
     }
     
     override func viewWillLayoutSubviews() {

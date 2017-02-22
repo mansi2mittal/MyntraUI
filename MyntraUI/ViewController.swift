@@ -13,8 +13,6 @@ import SwiftyJSON
 
 class ViewController: UIViewController {
     
-    //var arrayOfWatchesImages = [ #imageLiteral(resourceName: "Image-2"), #imageLiteral(resourceName: "Image-3"),#imageLiteral(resourceName: "Image-4"),#imageLiteral(resourceName: "Image-5"), #imageLiteral(resourceName: "Image-6"), #imageLiteral(resourceName: "Image-7"), #imageLiteral(resourceName: "Image-8"),#imageLiteral(resourceName: "Image-9"), #imageLiteral(resourceName: "Image-10"), #imageLiteral(resourceName: "Image-11"), #imageLiteral(resourceName: "Image-12"), #imageLiteral(resourceName: "Image-13"), #imageLiteral(resourceName: "Image-14")]
-    
    // CREATING A 2D ARRAY OF THE INDEXPATH OF THE CELLS OF THE TABLEVIEW AS WELL AS TEH COLLECTION VIEW THAT HAVE bBEN SELECTED AS FAVOURITE BY THE USER BY TAPPING ON THE HEART BUTTON
     
     var arrayOfFavourites = [[IndexPath]]()
@@ -31,7 +29,7 @@ class ViewController: UIViewController {
     var arrayOfHiddenRowsOfSection = [Int]()
     
     //  3D ARRAY OF IMAGES THAT IS BEEN FETCHED ON HITTING THE SERVICE
-    var imagesList =  [ImageInfo]()
+    var imagesList =  [[[ImageInfo]]]()
     
     // OUTLETS
     @IBOutlet weak var viewOnTop: UIImageView!
@@ -73,7 +71,7 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-  /*  func fetchData( with query : String)
+    func fetchData( with query : String)
     {
         var count = 1
         
@@ -96,7 +94,7 @@ class ViewController: UIViewController {
                 count = count + 1
                 }
             }
-        }*/
+        }
     }
 
 
@@ -131,14 +129,16 @@ class ViewController: UIViewController {
                 fatalError(" Cell Not Found")
             }
         
-        Webservices().fetchDataFromPixabay(withQuery: "dogs" , success: { (images : [ImageInfo]) in
+       /* Webservices().fetchDataFromPixabay(withQuery: "dogs" , success: { (images : [ImageInfo]) in
             
             self.imagesList = images
             cell.watchCollectionView.reloadData()
             
         }) { (error : Error) in
             
-        }
+        } */
+        
+    
 
         return cell
         }
@@ -148,6 +148,8 @@ class ViewController: UIViewController {
         func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
             
             guard  let tableCell = cell as? tableViewCellTableViewCell else {  fatalError(" Cell Not Found")}
+            
+            
 
             
             // ASSIGNING THE DELEGATE AND DATASOURCES
@@ -295,7 +297,19 @@ class ViewController: UIViewController {
         
         guard  let tableViewCell = collectionView.getTableViewCell as? tableViewCellTableViewCell else { fatalError( " Cell Not Found")   }
         
-        cell.label.isHidden = true
+        let imageInformationData = imagesList[tableViewCell.tableIndexPath.section][tableViewCell.tableIndexPath.row][indexPath.item]
+        
+        
+         if let url = URL(string: imageInformationData.previewURL) {
+            
+        cell.imageInCell.af_setImage(withURL : url)
+            
+        }
+
+        // HIDING THE LABEL IN THE CELL
+         cell.label.isHidden = true
+        
+        // ASSIGNING THE INDEXPATH OF THE CELL SPECIFYING THE SECTION, ROW AND INDEXPATH OF THE CELL.
         
          cell.label.text  = "\(tableViewCell.tableIndexPath!.section)  \(tableViewCell.tableIndexPath!.row)\(indexPath.row)"
         
@@ -309,10 +323,6 @@ class ViewController: UIViewController {
             cell.heartButton.isSelected = false
         }
 
-           if let url = URL(string: imagesList[indexPath.item].previewURL) {
-            
-            cell.imageInCell.af_setImage(withURL : url)
-        }
         
         cell.imageInCell.contentMode = .scaleAspectFill
         cell.layer.borderWidth = 5
@@ -328,9 +338,13 @@ class ViewController: UIViewController {
         
       //  let selectedCell = collectionView.cellForItem(at: indexPath) as! ImageCollectionViewCell
         
+        let tableViewCell = collectionView.getTableViewCell as! tableViewCellTableViewCell
+        
         let ZoomedView = self.storyboard?.instantiateViewController(withIdentifier: "ImageZoomViewControllerID") as! ImageZoomViewController
         
-        ZoomedView.imageURL = URL(string : imagesList[indexPath.item].webformatURL)
+        let imageInformationData = imagesList[tableViewCell.tableIndexPath.section][tableViewCell.tableIndexPath.row][indexPath.item]
+
+        ZoomedView.imageURL = URL(string : imageInformationData.webformatURL)
         
         
         // TAPPING THE CELL OF THE COLLECTION CELL WILL OPEN THE IMAGE ON FULL SCREEN ON A NEW VIEW CONTROLLER WITH ANIMATION

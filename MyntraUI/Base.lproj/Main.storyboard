@@ -24,19 +24,11 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Exg-XM-SgM" userLabel="viewOnTop">
                                 <rect key="frame" x="0.0" y="44" width="375" height="69"/>
-                                <color key="backgroundColor" red="1" green="0.65152102869999995" blue="0.81158393790000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.52645018980000002" green="0.44692750219999999" blue="0.89381741749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="69" id="pDN-vk-hvw"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EUQ-Sh-FHz">
-                                <rect key="frame" x="307" y="53" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="J3O-eV-0fK"/>
-                                    <constraint firstAttribute="height" constant="50" id="hV7-sp-mKt"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="Image-1"/>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qtg-4a-qgq">
                                 <rect key="frame" x="0.0" y="111" width="375" height="556"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -52,18 +44,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EUQ-Sh-FHz">
+                                <rect key="frame" x="335" y="66" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="BEc-ZP-C68"/>
+                                    <constraint firstAttribute="width" constant="40" id="DBr-rC-2r1"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="Image-1"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="tIi-BC-mbL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="2" id="1qW-tB-P9e"/>
                             <constraint firstItem="Exg-XM-SgM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="5jM-vu-gSA"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Qtg-4a-qgq" secondAttribute="bottom" id="6zy-cH-Iqk"/>
+                            <constraint firstItem="EUQ-Sh-FHz" firstAttribute="top" secondItem="Exg-XM-SgM" secondAttribute="bottom" constant="-47" id="BxJ-wR-jK2"/>
+                            <constraint firstAttribute="trailing" secondItem="EUQ-Sh-FHz" secondAttribute="trailing" id="GZv-LF-Pfx"/>
                             <constraint firstItem="Qtg-4a-qgq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="GdS-y1-etu"/>
-                            <constraint firstAttribute="trailing" secondItem="EUQ-Sh-FHz" secondAttribute="trailing" constant="18" id="MYp-aZ-cLT"/>
                             <constraint firstAttribute="trailing" secondItem="Exg-XM-SgM" secondAttribute="trailing" id="NEY-K5-Kzi"/>
                             <constraint firstItem="Exg-XM-SgM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="RIN-JK-jf9"/>
                             <constraint firstAttribute="leading" secondItem="tIi-BC-mbL" secondAttribute="leading" id="Sxg-kE-3vq"/>
-                            <constraint firstItem="EUQ-Sh-FHz" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-11" id="Wm3-RD-9AW"/>
                             <constraint firstItem="Qtg-4a-qgq" firstAttribute="top" secondItem="Exg-XM-SgM" secondAttribute="bottom" constant="-2" id="Y8O-vp-lLL"/>
                             <constraint firstAttribute="trailing" secondItem="Qtg-4a-qgq" secondAttribute="trailing" id="es5-a2-zTr"/>
                         </constraints>

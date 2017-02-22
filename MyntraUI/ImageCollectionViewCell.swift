@@ -11,6 +11,7 @@ import UIKit
 class ImageCollectionViewCell: UICollectionViewCell {
     //
      var arrayOfSelectedItems = [UIImage]()
+     var data : ImageInfo!
     
     @IBOutlet weak var imageInCell: UIImageView!
     @IBOutlet weak var heartButton: UIButton!
