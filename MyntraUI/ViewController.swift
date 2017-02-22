@@ -32,6 +32,8 @@
     //  3D ARRAY OF IMAGES THAT IS BEEN FETCHED ON HITTING THE SERVICE CONTAINING THE INFORMATION ABOUT SECTION ROW AND INDEXPATH
         
     var imagesList =  [[[ImageInfo]]]()
+        
+    var detailArray = [" dogs" , "cats" , " reptiles"]
     
     // OUTLETS
         
