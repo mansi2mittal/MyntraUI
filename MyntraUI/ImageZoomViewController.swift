@@ -10,11 +10,17 @@ import UIKit
 
    class ImageZoomViewController: UIViewController {
     
+    // OUTLETS
+    
     @IBOutlet weak var zoomedImage: UIImageView!
     
     @IBOutlet weak var closeButton: UIButton!
     
+    // VARIABLE TO STORE THE IMAGE URL AS URL
+    
     var imageURL : URL!
+    
+    // VARIABLE TO PASS AS THE IMAGE IN THE UIIMAGE VIEW
     
     var zoomImg : UIImage!
     
@@ -23,6 +29,8 @@ import UIKit
         
         zoomedImage.image = zoomImg
     }
+    
+    // FUNCTION TO LAYOUT SUBVIEWS WHWN THE VIEW WILL LOAD 
     
     override func viewWillLayoutSubviews() {
         
@@ -35,7 +43,7 @@ import UIKit
         // Dispose of any resources that can be recreated.
     }
     
-   // on the click of the close button the image, hoem screen will appear and the image full screen view controller will be popped back
+   // CLICKING THE CLOSE BUTTON , HOME SCREEN WILL APPEAR
     
     //  MARK : ACTIONS
       @IBAction func closeButton(_ sender: UIButton) {
@@ -46,8 +54,6 @@ import UIKit
         })
 
     }
-    
-    // function to populate data 
     
  
     

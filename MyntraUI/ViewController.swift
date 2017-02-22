@@ -6,12 +6,12 @@
 //  Copyright © 2017 Appinventiv. All rights reserved.
 //
 
-import UIKit
-import AlamofireImage
-import SwiftyJSON
+    import UIKit
+    import AlamofireImage
+    import SwiftyJSON
 
 
-class ViewController: UIViewController {
+    class ViewController: UIViewController {
     
    // CREATING A 2D ARRAY OF THE INDEXPATH OF THE CELLS OF THE TABLEVIEW AS WELL AS TEH COLLECTION VIEW THAT HAVE bBEN SELECTED AS FAVOURITE BY THE USER BY TAPPING ON THE HEART BUTTON
     
@@ -42,8 +42,8 @@ class ViewController: UIViewController {
 
     
     // MARK: VIEW LIFECYCLE
-    override func viewDidLoad()
-    {
+     override func viewDidLoad()
+     {
         super.viewDidLoad()
         
         tableView.dataSource = self
@@ -64,27 +64,32 @@ class ViewController: UIViewController {
         // REGISTERING THE NIB FOR THE HEADER VIEW INSIDE THE TABLE VIEW
         tableView.register(headerNib , forHeaderFooterViewReuseIdentifier: "headerViewID")
         
+        // FUNCTION CALLING 
+        fetchData(with: "dogs")
+        
     }
 
-    override func didReceiveMemoryWarning() {
+     override func didReceiveMemoryWarning() {
         
         super.didReceiveMemoryWarning()
     }
     
+    // FUNCTION INITIALLY FETCHING AND STORING DATA INSIDE A 3D ARRAY NAMED imagesList
+    
     func fetchData( with query : String)
-    {
-        var count = 1
+     {
+        var count = 1 // KEEPING A COUNT SO THAT SAME PAGE IS NOT LOADED AGAIN AND AGAIN
         
         for sect in 0...2{
             
-            imagesList.append([])
+        imagesList.append([])
             
             for _ in 0...2{
                 
                 Webservices().fetchDataFromPixabay(withQuery : query,
                                                    page: count ,
                                                    success : {(input : [ImageInfo]) -> Void in
-                                                self.imagesList[sect].append(input)
+                                                    self.imagesList[sect].append(input)
                                                     print("Hitted")
                                                     self.tableView.reloadData()
                 },
@@ -92,22 +97,27 @@ class ViewController: UIViewController {
                                                     print(error)
                 })
                 count = count + 1
-                }
             }
         }
+    }
+    
+    
     }
 
 
     // MARK: EXTENSION FOR TABLEVIEW
+
     extension ViewController : UITableViewDelegate , UITableViewDataSource  {
     
      // RETURNS THE NUMBER OF SECTIONS IN THE TABLEVIEW
         
     func  numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        
+        return imagesList.count
      }
         
      // RETURNS THE NUMBER OF ROWS IN SECTION OF THE TABLE VIEW
+        
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if arrayOfHiddenRowsOfSection.contains(section)
@@ -116,43 +126,27 @@ class ViewController: UIViewController {
         }
         else
         {
-            return 3
+            return imagesList[section].count
         }
         
         
-    }
+       }
     // RETURNS THE CELL FOR THAT PARTICULAR ROW
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-            
-     guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCellTableViewCellID", for: indexPath) as? tableViewCellTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCellTableViewCellID", for: indexPath) as? tableViewCellTableViewCell else {
                 fatalError(" Cell Not Found")
-            }
-        
-       /* Webservices().fetchDataFromPixabay(withQuery: "dogs" , success: { (images : [ImageInfo]) in
-            
-            self.imagesList = images
-            cell.watchCollectionView.reloadData()
-            
-        }) { (error : Error) in
-            
-        } */
-        
-    
-
-        return cell
+             }
+            return cell
         }
         
        // WILL DISPLAY A PARTICULAR CELL AT A PARTICULAR INDEXPATH
         
-        func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
             
             guard  let tableCell = cell as? tableViewCellTableViewCell else {  fatalError(" Cell Not Found")}
             
-            
-
-            
-            // ASSIGNING THE DELEGATE AND DATASOURCES
+      // ASSIGNING THE DELEGATE AND DATASOURCES
             
             tableCell.watchCollectionView.delegate = self
             
@@ -175,24 +169,21 @@ class ViewController: UIViewController {
             
             tableCell.tableIndexPath = indexPath
             
-            
-            
-            
-        }
+            }
     
-    // DEFINES THE VIEW FOR HEADER IN SECTION
+      // DEFINES THE VIEW FOR HEADER IN SECTION
         
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+      func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-     guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerViewID") as? headerView else {
+      guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerViewID") as? headerView else {
             fatalError(" Header Not Found")
         }
         
-    // EACH TIME A HEADER IS CREATED CHECKING WHETHER IS IS BEEN SELECTED TO MINIMIZE ITSELF BY ASSIGNING THE TAG TO THE BUTTON AS THE SECTION NUMBER SO THAT WE CAN KNOW WHICH SECTION'S BUTTON IS BEEN TAPPED.
+     // EACH TIME A HEADER IS CREATED CHECKING WHETHER IS IS BEEN SELECTED TO MINIMIZE ITSELF BY ASSIGNING THE TAG TO THE BUTTON AS THE SECTION NUMBER SO THAT WE CAN KNOW WHICH SECTION'S BUTTON IS BEEN TAPPED.
         
-     header.sectionMinimizeButton.tag = section
+       header.sectionMinimizeButton.tag = section
         
-     header.sectionMinimizeButton.addTarget(self, action: #selector(sectionMinimizeButtonTapped) , for: .touchUpInside)
+       header.sectionMinimizeButton.addTarget(self, action: #selector(sectionMinimizeButtonTapped) , for: .touchUpInside)
         
         if arrayOfHiddenRowsOfSection.contains(section)
         {
@@ -202,30 +193,32 @@ class ViewController: UIViewController {
             header.sectionMinimizeButton.isSelected = false
         }
         
-     header.layer.borderWidth = 4
+       header.layer.borderWidth = 4
         
-     header.layer.borderColor = UIColor.black.cgColor
+       header.layer.borderColor = UIColor.black.cgColor
         
-     return header
+       return header
         
-    }
-    // REURNS THE HEIGHT FOR HEADER IN SECTION
+      }
         
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+     // REURNS THE HEIGHT FOR HEADER IN SECTION
+        
+      func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
          return 49
-    }
+     }
+        
     // HANDLING THE TAP ON THE MINIMIZE HEADER BUTTON
         
     func sectionMinimizeButtonTapped (sender : UIButton)
-    {
-        if sender.isSelected{
+     {
+      if sender.isSelected{
             
         sender.isSelected = false
         arrayOfHiddenRowsOfSection =  arrayOfHiddenRowsOfSection.filter( {$0 != sender.tag })
             
         }
-        else
+       else
         {
             sender.isSelected = true
             arrayOfHiddenRowsOfSection.append(sender.tag)
@@ -234,6 +227,7 @@ class ViewController: UIViewController {
         tableView.reloadSections([sender.tag], with: .top)
         print(arrayOfHiddenRowsOfSection)
     }
+        
     // RETURNS THE HEIGHT FOR ROW AT A PARTICULAR INDEXPATH
         
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -272,24 +266,27 @@ class ViewController: UIViewController {
               }
         
         tableView.reloadRows(at: [tableCellIndexPath], with: .top)
-      }
-}
+       }
+     }
 
-    // MARK: EXTENSION FOR COLLECTION VIEW
+     // MARK: EXTENSION FOR COLLECTION VIEW
 
-   extension ViewController : UICollectionViewDataSource , UICollectionViewDelegate,UICollectionViewDelegateFlowLayout
+     extension ViewController : UICollectionViewDataSource , UICollectionViewDelegate,UICollectionViewDelegateFlowLayout
     
-    {
-    // RETURNS THE NUMBER OF ITEMS IN SECTION
-    
+     {
+     // RETURNS THE NUMBER OF ITEMS IN SECTION
+
      func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return imagesList.count
+        let tablecell = collectionView.getTableViewCell as! tableViewCellTableViewCell
+        
+        return imagesList[tablecell.tableIndexPath.section][tablecell.tableIndexPath.row].count
+        
     }
     
     // RETURNS THE CELL FOR ITEM AT INDEXPATH
     
-     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:"ImageCollectionViewCellID", for: indexPath) as? ImageCollectionViewCell  else {
             fatalError(" cell not Found")
@@ -297,10 +294,12 @@ class ViewController: UIViewController {
         
         guard  let tableViewCell = collectionView.getTableViewCell as? tableViewCellTableViewCell else { fatalError( " Cell Not Found")   }
         
+        // STORING THE IMAGES OF A PARTICULAR SECTION AND ROW IN A VARIABLE
+        
         let imageInformationData = imagesList[tableViewCell.tableIndexPath.section][tableViewCell.tableIndexPath.row][indexPath.item]
         
         
-         if let url = URL(string: imageInformationData.previewURL) {
+        if let url = URL(string: imageInformationData.previewURL) {
             
         cell.imageInCell.af_setImage(withURL : url)
             
@@ -323,7 +322,6 @@ class ViewController: UIViewController {
             cell.heartButton.isSelected = false
         }
 
-        
         cell.imageInCell.contentMode = .scaleAspectFill
         cell.layer.borderWidth = 5
         cell.layer.borderColor = UIColor.black.cgColor
@@ -334,6 +332,7 @@ class ViewController: UIViewController {
         return cell
     }
     // PERFORMING ACTIONS ON THE SELECTED ITEM
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
       //  let selectedCell = collectionView.cellForItem(at: indexPath) as! ImageCollectionViewCell
@@ -361,15 +360,15 @@ class ViewController: UIViewController {
         
         // FETCHING THE SUPERVIEW OF THE SENDER BY CALLING THE EXTENSION'S COMPUTED PROPERTIES
         
-        guard  let tableViewCell = sender.getTableViewCell as? tableViewCellTableViewCell else { return }
+       guard  let tableViewCell = sender.getTableViewCell as? tableViewCellTableViewCell else { return }
         
-        let tableCellIndexPath = tableView.indexPath(for: tableViewCell)
+       let tableCellIndexPath = tableView.indexPath(for: tableViewCell)
         
        guard  let collectionCell = sender.getCollectionViewCell as? ImageCollectionViewCell else  { return }
         
-        let collectionCellIndexPath = tableViewCell.watchCollectionView.indexPath(for: collectionCell)
+       let collectionCellIndexPath = tableViewCell.watchCollectionView.indexPath(for: collectionCell)
         
-         if sender.isSelected {
+       if sender.isSelected {
             
             sender.isSelected = false
             arrayOfFavourites =   arrayOfFavourites.filter({ (index : [IndexPath]) -> Bool in
@@ -377,7 +376,7 @@ class ViewController: UIViewController {
             })
             
         }
-         else {
+       else {
            sender.isSelected = true
            arrayOfFavourites.append([tableCellIndexPath! , collectionCellIndexPath!])
               }
@@ -385,7 +384,7 @@ class ViewController: UIViewController {
 
     }
     
-// SETTING THE COLLECTION VIEW LAYOUT SPECYFING THE SIZE OF THE ITEM
+    // SETTING THE COLLECTION VIEW LAYOUT SPECYFING THE SIZE OF THE ITEM
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout : UICollectionViewLayout , sizeForItemAt indexPath: IndexPath) -> CGSize
     {
@@ -393,9 +392,7 @@ class ViewController: UIViewController {
     }
     
 
-}
-
-// MARK: NAVIGATION
+    }
 
 
 

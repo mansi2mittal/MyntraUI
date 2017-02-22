@@ -9,9 +9,12 @@
 import UIKit
 
 class ImageCollectionViewCell: UICollectionViewCell {
-    //
-     var arrayOfSelectedItems = [UIImage]()
+    
+    // VARIABLE TO STORE THE IMAGE INFO 
+    
      var data : ImageInfo!
+    
+    // OUTLETS
     
     @IBOutlet weak var imageInCell: UIImageView!
     @IBOutlet weak var heartButton: UIButton!
@@ -19,16 +22,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
 
-        // Initialization code
     }
-
-    // function to handle the tap on the heartButton
-    func heartButtonTapped(sender: UIButton) {
-        
-        sender.isSelected =   !sender.isSelected
         
     }
-
-}

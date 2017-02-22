@@ -10,8 +10,10 @@ import UIKit
 
    class tableViewCellTableViewCell: UITableViewCell {
     
+    // VARIABLE TO STORE THE INDEXPATH OF THE TABLECELL
     
     var tableIndexPath : IndexPath!
+    
      // OUTLETS
     
     @IBOutlet weak var watchLabel: UILabel!
@@ -24,6 +26,7 @@ import UIKit
     super.awakeFromNib()
      
     // SETTING UP THE FLOW LAYOUT
+        
     let flowLayout = UICollectionViewFlowLayout()
     flowLayout.itemSize = CGSize(width: 120, height: 120)
     flowLayout.minimumInteritemSpacing = 5
@@ -31,19 +34,19 @@ import UIKit
     watchCollectionView.collectionViewLayout = flowLayout
         
     // CREATING THE NIB OF THE COLLECTION VIEW CELL
+        
     let nibOfCollCell = UINib( nibName : "ImageCollectionViewCell" , bundle : nil)
         
     // REGISTERING THE NIB OF THE COLLECTION VIEW CELL
+        
     watchCollectionView.register(nibOfCollCell, forCellWithReuseIdentifier: "ImageCollectionViewCellID")
+        
     }
     
     override func prepareForReuse() {
         
         watchCollectionView.reloadData()
     }
-
-    
-    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)
