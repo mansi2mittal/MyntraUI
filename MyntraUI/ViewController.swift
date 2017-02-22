@@ -26,12 +26,15 @@
     var arrayOfFavouriteImages = [UIImage]()
     
     // ARRAY OF THE INDEXPATH OF THE ROWS THAT ARE BEEN SELECTED TO MINIMIZE IN A SECTION
+        
     var arrayOfHiddenRowsOfSection = [Int]()
     
-    //  3D ARRAY OF IMAGES THAT IS BEEN FETCHED ON HITTING THE SERVICE
+    //  3D ARRAY OF IMAGES THAT IS BEEN FETCHED ON HITTING THE SERVICE CONTAINING THE INFORMATION ABOUT SECTION ROW AND INDEXPATH
+        
     var imagesList =  [[[ImageInfo]]]()
     
     // OUTLETS
+        
     @IBOutlet weak var viewOnTop: UIImageView!
     
     @IBOutlet weak var labelMyntra: UILabel!
@@ -41,7 +44,8 @@
     @IBOutlet weak var tableView: UITableView!
 
     
-    // MARK: VIEW LIFECYCLE
+     // MARK: VIEW LIFECYCLE
+        
      override func viewDidLoad()
      {
         super.viewDidLoad()
@@ -132,6 +136,7 @@
         
        }
     // RETURNS THE CELL FOR THAT PARTICULAR ROW
+        
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCellTableViewCellID", for: indexPath) as? tableViewCellTableViewCell else {
@@ -146,7 +151,7 @@
             
             guard  let tableCell = cell as? tableViewCellTableViewCell else {  fatalError(" Cell Not Found")}
             
-      // ASSIGNING THE DELEGATE AND DATASOURCES
+            // ASSIGNING THE DELEGATE AND DATASOURCES
             
             tableCell.watchCollectionView.delegate = self
             
@@ -208,7 +213,24 @@
          return 49
      }
         
-    // HANDLING THE TAP ON THE MINIMIZE HEADER BUTTON
+        // RETURNS THE HEIGHT FOR ROW AT A PARTICULAR INDEXPATH
+        
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            
+            // REDUCING THE HEIGHT FOR THE ROW AS 30 IF THE ROW IS TO BE MINIMIZED ELSE THE NORMAL SIZE
+            
+            if arrayOfMinimizedRows.contains(indexPath)
+            {
+                return 30
+            }
+            else
+            {
+                return 150
+            }
+        }
+        
+        
+     // HANDLING THE TAP ON THE MINIMIZE HEADER BUTTON
         
     func sectionMinimizeButtonTapped (sender : UIButton)
      {
@@ -225,27 +247,9 @@
         }
         
         tableView.reloadSections([sender.tag], with: .top)
-        print(arrayOfHiddenRowsOfSection)
+        //print(arrayOfHiddenRowsOfSection)
     }
         
-    // RETURNS THE HEIGHT FOR ROW AT A PARTICULAR INDEXPATH
-        
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-    // REDUCING THE HEIGHT FOR THE ROW AS 30 IF THE ROW IS TO BE MINIMIZED ELSE THE NORMAL SIZE
-        
-     if arrayOfMinimizedRows.contains(indexPath)
-        {
-            return 30
-        }
-     else
-        {
-            return 150
-        }
-    }
-        
-      
-
     // FUNCTION TO HANDLE THE TAP ON THE MINIMIZED BUTTON
     
     func minimizeButtonTapped(sender: UIButton)
@@ -292,12 +296,11 @@
             fatalError(" cell not Found")
         }
         
-        guard  let tableViewCell = collectionView.getTableViewCell as? tableViewCellTableViewCell else { fatalError( " Cell Not Found")   }
+        guard  let tableViewCell = collectionView.getTableViewCell as? tableViewCellTableViewCell else { fatalError( " Cell Not Found")  }
         
         // STORING THE IMAGES OF A PARTICULAR SECTION AND ROW IN A VARIABLE
         
         let imageInformationData = imagesList[tableViewCell.tableIndexPath.section][tableViewCell.tableIndexPath.row][indexPath.item]
-        
         
         if let url = URL(string: imageInformationData.previewURL) {
             
@@ -306,12 +309,14 @@
         }
 
         // HIDING THE LABEL IN THE CELL
+        
          cell.label.isHidden = true
         
         // ASSIGNING THE INDEXPATH OF THE CELL SPECIFYING THE SECTION, ROW AND INDEXPATH OF THE CELL.
         
          cell.label.text  = "\(tableViewCell.tableIndexPath!.section)  \(tableViewCell.tableIndexPath!.row)\(indexPath.row)"
         
+        // PERSISTING THE CELLS THAT HAVE BEEN SELECTED AS FAVOURITE
         
         if  arrayOfFavourites.contains (where:{ (index : [IndexPath]) -> Bool in
             return index == [tableViewCell.tableIndexPath! , indexPath] })
@@ -335,24 +340,28 @@
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-      //  let selectedCell = collectionView.cellForItem(at: indexPath) as! ImageCollectionViewCell
-        
         let tableViewCell = collectionView.getTableViewCell as! tableViewCellTableViewCell
         
         let ZoomedView = self.storyboard?.instantiateViewController(withIdentifier: "ImageZoomViewControllerID") as! ImageZoomViewController
-        
-        let imageInformationData = imagesList[tableViewCell.tableIndexPath.section][tableViewCell.tableIndexPath.row][indexPath.item]
-
-        ZoomedView.imageURL = URL(string : imageInformationData.webformatURL)
-        
         
         // TAPPING THE CELL OF THE COLLECTION CELL WILL OPEN THE IMAGE ON FULL SCREEN ON A NEW VIEW CONTROLLER WITH ANIMATION
         
         UIView.animate(withDuration: 0.1 , delay: 0.0, options: .curveEaseInOut, animations:
             {  self.navigationController?.pushViewController(ZoomedView, animated: true)
-            }, completion:nil )
-    
-    }
+        }, completion:nil )
+
+        let imageInformationData = imagesList[tableViewCell.tableIndexPath.section][tableViewCell.tableIndexPath.row][indexPath.item]
+
+        ZoomedView.imageURL = URL(string : imageInformationData.webformatURL)
+        
+        }
+        
+    // SETTING THE COLLECTION VIEW LAYOUT SPECYFING THE SIZE OF THE ITEM
+        
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout : UICollectionViewLayout , sizeForItemAt indexPath: IndexPath) -> CGSize
+        {
+            return CGSize(width: 120 , height: 120)
+        }
     
      // HANDLING THE TAP ON THE FAVOURITE BUTTON
     
@@ -376,23 +385,15 @@
             })
             
         }
-       else {
+        else {
            sender.isSelected = true
            arrayOfFavourites.append([tableCellIndexPath! , collectionCellIndexPath!])
               }
          print(arrayOfFavourites)
 
-    }
+     }
     
-    // SETTING THE COLLECTION VIEW LAYOUT SPECYFING THE SIZE OF THE ITEM
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout : UICollectionViewLayout , sizeForItemAt indexPath: IndexPath) -> CGSize
-    {
-        return CGSize(width: 120 , height: 120)
-    }
-    
-
-    }
+     }
 
 
 
