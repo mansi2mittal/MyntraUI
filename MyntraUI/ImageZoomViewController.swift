@@ -14,12 +14,17 @@ import UIKit
     
     @IBOutlet weak var closeButton: UIButton!
     
-    var zoomImg: UIImage!
+    var imageURL : URL!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        zoomedImage.image = zoomImg
     }
+    
+    override func viewWillLayoutSubviews() {
+        
+        zoomedImage.af_setImage(withURL: imageURL)
+    }
+
 
      override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -31,10 +36,9 @@ import UIKit
     //  MARK : ACTIONS
       @IBAction func closeButton(_ sender: UIButton) {
         
-        UIView.animate(withDuration: 1, animations: {
+        UIView.animate(withDuration: 0.1, animations: {
             UIView.setAnimationCurve(UIViewAnimationCurve.easeInOut)
             self.navigationController?.popViewController(animated: true)
-            UIView.setAnimationTransition(UIViewAnimationTransition.flipFromRight, for: self.navigationController!.view! , cache: false)
         })
 
     }

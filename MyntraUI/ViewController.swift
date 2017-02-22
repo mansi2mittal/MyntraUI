@@ -239,16 +239,25 @@ class ViewController: UIViewController {
             fatalError(" cell not Found")
         }
         
-        if let url = URL(string: imagesList[indexPath.item].previewURL) {
+        guard  let tableViewCell = collectionView.getTableViewCell as? tableViewCellTableViewCell else { fatalError( " Cell Not Found")   }
+        
+        let tableCellIndexPath = tableView.indexPath(for: tableViewCell)
+        
+        if  arrayOfFavourites.contains (where:{ (index : [IndexPath]) -> Bool in
+            return index == [tableCellIndexPath! , indexPath] })
+        {
+            cell.heartButton.isSelected = true
+        }
+        else{
+            cell.heartButton.isSelected = false
+        }
+
+           if let url = URL(string: imagesList[indexPath.item].previewURL) {
             
             cell.imageInCell.af_setImage(withURL : url)
         }
         
         cell.imageInCell.contentMode = .scaleAspectFill
-        
-
-        
-        // POULATING DATA INTO THE CELLS
         cell.layer.borderWidth = 5
         cell.layer.borderColor = UIColor.black.cgColor
         
@@ -260,18 +269,17 @@ class ViewController: UIViewController {
     // PERFORMING ACTIONS ON THE SELECTED ITEM
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let selectedCell = collectionView.cellForItem(at: indexPath) as! ImageCollectionViewCell
+      //  let selectedCell = collectionView.cellForItem(at: indexPath) as! ImageCollectionViewCell
         
         let ZoomedView = self.storyboard?.instantiateViewController(withIdentifier: "ImageZoomViewControllerID") as! ImageZoomViewController
+        
+        ZoomedView.imageURL = URL(string : imagesList[indexPath.item].webformatURL)
         
         
         // TAPPING THE CELL OF THE COLLECTION CELL WILL OPEN THE IMAGE ON FULL SCREEN ON A NEW VIEW CONTROLLER WITH ANIMATION
         
-        ZoomedView.zoomImg = selectedCell.imageInCell.image
-        
         UIView.animate(withDuration: 0.1 , delay: 0.0, options: .curveEaseInOut, animations:
             {  self.navigationController?.pushViewController(ZoomedView, animated: true)
-                UIView.setAnimationTransition(UIViewAnimationTransition.flipFromRight, for: self.navigationController!.view! , cache: false)
             }, completion:nil )
     
     }
