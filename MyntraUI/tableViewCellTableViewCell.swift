@@ -10,6 +10,8 @@ import UIKit
 
    class tableViewCellTableViewCell: UITableViewCell {
     
+    
+    var tableIndexPath : IndexPath!
      // OUTLETS
     
     @IBOutlet weak var watchLabel: UILabel!
@@ -34,6 +36,14 @@ import UIKit
     // REGISTERING THE NIB OF THE COLLECTION VIEW CELL
     watchCollectionView.register(nibOfCollCell, forCellWithReuseIdentifier: "ImageCollectionViewCellID")
     }
+    
+    override func prepareForReuse() {
+        
+        watchCollectionView.reloadData()
+    }
+
+    
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)

@@ -36,6 +36,14 @@
                             <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JR9-Rq-aWo">
+                        <rect key="frame" x="18" y="16" width="75" height="33"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.69271991079999995" green="0.89381741749999999" blue="0.61612495739999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <constraints>
@@ -50,8 +58,9 @@
             <connections>
                 <outlet property="heartButton" destination="Y2M-03-cGv" id="mkj-m6-ss0"/>
                 <outlet property="imageInCell" destination="0id-FE-STd" id="5mm-n2-dUe"/>
+                <outlet property="label" destination="JR9-Rq-aWo" id="Qg3-HQ-eO7"/>
             </connections>
-            <point key="canvasLocation" x="176" y="-341"/>
+            <point key="canvasLocation" x="-37" y="-398"/>
         </collectionViewCell>
     </objects>
     <resources>

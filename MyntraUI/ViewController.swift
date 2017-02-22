@@ -27,10 +27,11 @@ class ViewController: UIViewController {
     
     var arrayOfFavouriteImages = [UIImage]()
     
-    // ARRAY OF THE INDEXPATH OF TEH ROWS THAT ARE BEEN SELECTED TO MINIMIZE IN A SECTION
+    // ARRAY OF THE INDEXPATH OF THE ROWS THAT ARE BEEN SELECTED TO MINIMIZE IN A SECTION
     var arrayOfHiddenRowsOfSection = [Int]()
     
-    var imagesList = [ImageInfo]()
+    //  3D ARRAY OF IMAGES THAT IS BEEN FETCHED ON HITTING THE SERVICE
+    var imagesList =  [ImageInfo]()
     
     // OUTLETS
     @IBOutlet weak var viewOnTop: UIImageView!
@@ -62,7 +63,7 @@ class ViewController: UIViewController {
         // CREATING THE NIB FOR THE HEADER VIEW
         let headerNib = UINib( nibName : "headerView" , bundle : nil)
         
-        // REGISTERING THE NIB FOR THE HEADER VIEW
+        // REGISTERING THE NIB FOR THE HEADER VIEW INSIDE THE TABLE VIEW
         tableView.register(headerNib , forHeaderFooterViewReuseIdentifier: "headerViewID")
         
     }
@@ -71,16 +72,43 @@ class ViewController: UIViewController {
         
         super.didReceiveMemoryWarning()
     }
+    
+  /*  func fetchData( with query : String)
+    {
+        var count = 1
+        
+        for sect in 0...2{
+            
+            imagesList.append([])
+            
+            for _ in 0...2{
+                
+                Webservices().fetchDataFromPixabay(withQuery : query,
+                                                   page: count ,
+                                                   success : {(input : [ImageInfo]) -> Void in
+                                                self.imagesList[sect].append(input)
+                                                    print("Hitted")
+                                                    self.tableView.reloadData()
+                },
+                                                   failure : {( error : Error) -> Void in
+                                                    print(error)
+                })
+                count = count + 1
+                }
+            }
+        }*/
+    }
 
 
-}
     // MARK: EXTENSION FOR TABLEVIEW
     extension ViewController : UITableViewDelegate , UITableViewDataSource  {
     
      // RETURNS THE NUMBER OF SECTIONS IN THE TABLEVIEW
-     func numberOfSections(in tableView: UITableView) -> Int {
+        
+    func  numberOfSections(in tableView: UITableView) -> Int {
         return 3
      }
+        
      // RETURNS THE NUMBER OF ROWS IN SECTION OF THE TABLE VIEW
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -103,8 +131,7 @@ class ViewController: UIViewController {
                 fatalError(" Cell Not Found")
             }
         
-        
-        Webservices().fetchDataFromPixabay(withQuery: "dogs", success: { (images : [ImageInfo]) in
+        Webservices().fetchDataFromPixabay(withQuery: "dogs" , success: { (images : [ImageInfo]) in
             
             self.imagesList = images
             cell.watchCollectionView.reloadData()
@@ -113,33 +140,54 @@ class ViewController: UIViewController {
             
         }
 
-    // EACH TIME THE CELL IS LOADED CHECKING WHETHER THE PARTICULAR ROW IS ALREADY SELECTED FOR MINIMIZING TO PERSIST THE MINIMIZATION
-        
-     if(arrayOfMinimizedRows.contains(indexPath)){
-        
-            cell.minimizeButton.isSelected = true
-        }
-     else{
-            cell.minimizeButton.isSelected = false
+        return cell
         }
         
-    //ADDING TARGET ON THE MINIMIZED BUTTON TO HANDLE THE TAP ON THE ROW MINIMIZED BUTTON
+       // WILL DISPLAY A PARTICULAR CELL AT A PARTICULAR INDEXPATH
         
-     cell.minimizeButton.addTarget(self, action: #selector(minimizeButtonTapped), for: .touchUpInside)
-        
-    // ASSIGNING THE DELEGATE AND DATASOURCES
-     cell.watchCollectionView.delegate = self
-        
-     cell.watchCollectionView.dataSource = self
-     return cell
+        func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+            
+            guard  let tableCell = cell as? tableViewCellTableViewCell else {  fatalError(" Cell Not Found")}
+
+            
+            // ASSIGNING THE DELEGATE AND DATASOURCES
+            
+            tableCell.watchCollectionView.delegate = self
+            
+            tableCell.watchCollectionView.dataSource = self
+            
+            
+            // EACH TIME THE CELL IS LOADED CHECKING WHETHER THE PARTICULAR ROW IS ALREADY SELECTED FOR MINIMIZING TO PERSIST THE MINIMIZATION
+            
+            if(arrayOfMinimizedRows.contains(indexPath)){
+                
+                tableCell.minimizeButton.isSelected = true
+            }
+            else{
+                tableCell.minimizeButton.isSelected = false
+            }
+            
+            //ADDING TARGET ON THE MINIMIZED BUTTON TO HANDLE THE TAP ON THE ROW MINIMIZED BUTTON
+            
+            tableCell.minimizeButton.addTarget(self, action: #selector(minimizeButtonTapped), for: .touchUpInside)
+            
+            tableCell.tableIndexPath = indexPath
+            
+            
+            
+            
         }
     
     // DEFINES THE VIEW FOR HEADER IN SECTION
+        
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
      guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerViewID") as? headerView else {
             fatalError(" Header Not Found")
         }
+        
+    // EACH TIME A HEADER IS CREATED CHECKING WHETHER IS IS BEEN SELECTED TO MINIMIZE ITSELF BY ASSIGNING THE TAG TO THE BUTTON AS THE SECTION NUMBER SO THAT WE CAN KNOW WHICH SECTION'S BUTTON IS BEEN TAPPED.
+        
      header.sectionMinimizeButton.tag = section
         
      header.sectionMinimizeButton.addTarget(self, action: #selector(sectionMinimizeButtonTapped) , for: .touchUpInside)
@@ -171,11 +219,16 @@ class ViewController: UIViewController {
     {
         if sender.isSelected{
             
+        sender.isSelected = false
         arrayOfHiddenRowsOfSection =  arrayOfHiddenRowsOfSection.filter( {$0 != sender.tag })
+            
         }
-        else {
+        else
+        {
+            sender.isSelected = true
             arrayOfHiddenRowsOfSection.append(sender.tag)
         }
+        
         tableView.reloadSections([sender.tag], with: .top)
         print(arrayOfHiddenRowsOfSection)
     }
@@ -194,6 +247,8 @@ class ViewController: UIViewController {
             return 150
         }
     }
+        
+      
 
     // FUNCTION TO HANDLE THE TAP ON THE MINIMIZED BUTTON
     
@@ -204,19 +259,18 @@ class ViewController: UIViewController {
         
         guard let tableCellIndexPath = tableView.indexPath(for: tableViewCell) else { return }
         
-        if !sender.isSelected {
+        if sender.isSelected {
             
             sender.isSelected = false
-            arrayOfMinimizedRows.append(tableCellIndexPath)
-            tableView.reloadRows(at: [tableCellIndexPath], with: .top)
-        }
+            arrayOfMinimizedRows.remove(at: arrayOfMinimizedRows.index(of: tableCellIndexPath )!)
+                    }
         else {
             sender.isSelected = true
-            
-            arrayOfMinimizedRows.remove(at: arrayOfMinimizedRows.index(of: tableCellIndexPath )!)
-        }
+            arrayOfMinimizedRows.append(tableCellIndexPath)
+              }
+        
         tableView.reloadRows(at: [tableCellIndexPath], with: .top)
-    }
+      }
 }
 
     // MARK: EXTENSION FOR COLLECTION VIEW
@@ -241,10 +295,13 @@ class ViewController: UIViewController {
         
         guard  let tableViewCell = collectionView.getTableViewCell as? tableViewCellTableViewCell else { fatalError( " Cell Not Found")   }
         
-        let tableCellIndexPath = tableView.indexPath(for: tableViewCell)
+        cell.label.isHidden = true
+        
+         cell.label.text  = "\(tableViewCell.tableIndexPath!.section)  \(tableViewCell.tableIndexPath!.row)\(indexPath.row)"
+        
         
         if  arrayOfFavourites.contains (where:{ (index : [IndexPath]) -> Bool in
-            return index == [tableCellIndexPath! , indexPath] })
+            return index == [tableViewCell.tableIndexPath! , indexPath] })
         {
             cell.heartButton.isSelected = true
         }
@@ -304,12 +361,14 @@ class ViewController: UIViewController {
             arrayOfFavourites =   arrayOfFavourites.filter({ (index : [IndexPath]) -> Bool in
                 return index != [tableCellIndexPath! , collectionCellIndexPath!]
             })
+            
         }
          else {
            sender.isSelected = true
            arrayOfFavourites.append([tableCellIndexPath! , collectionCellIndexPath!])
-       }
+              }
          print(arrayOfFavourites)
+
     }
     
 // SETTING THE COLLECTION VIEW LAYOUT SPECYFING THE SIZE OF THE ITEM

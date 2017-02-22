@@ -14,6 +14,8 @@ class ImageCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageInCell: UIImageView!
     @IBOutlet weak var heartButton: UIButton!
+    @IBOutlet weak var label: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
