@@ -78,8 +78,8 @@
      override func didReceiveMemoryWarning() {
         
         super.didReceiveMemoryWarning()
+      }
     }
-}
 
 
     // MARK: EXTENSION FOR TABLEVIEW
