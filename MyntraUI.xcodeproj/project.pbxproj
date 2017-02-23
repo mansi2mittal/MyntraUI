@@ -20,6 +20,7 @@
 		0C32CC8C1E55857C00A04941 /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C32CC8A1E55857C00A04941 /* ImageCollectionViewCell.xib */; };
 		0C32CC8F1E558CE200A04941 /* tableViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C32CC8D1E558CE200A04941 /* tableViewCellTableViewCell.swift */; };
 		0C32CC901E558CE200A04941 /* tableViewCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C32CC8E1E558CE200A04941 /* tableViewCellTableViewCell.xib */; };
+		0C48A8A91E5EBF70007C9CDE /* Jason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C48A8A81E5EBF70007C9CDE /* Jason.swift */; };
 		0CF309B01E58270900DD0C9F /* extensionUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF309AF1E58270900DD0C9F /* extensionUI.swift */; };
 		0CFE557F1E5598D800EF0E57 /* headerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CFE557E1E5598D800EF0E57 /* headerView.xib */; };
 		0CFE55811E55991000EF0E57 /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFE55801E55991000EF0E57 /* headerView.swift */; };
@@ -42,6 +43,7 @@
 		0C32CC8A1E55857C00A04941 /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		0C32CC8D1E558CE200A04941 /* tableViewCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tableViewCellTableViewCell.swift; sourceTree = "<group>"; };
 		0C32CC8E1E558CE200A04941 /* tableViewCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = tableViewCellTableViewCell.xib; sourceTree = "<group>"; };
+		0C48A8A81E5EBF70007C9CDE /* Jason.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Jason.swift; sourceTree = "<group>"; };
 		0CF309AF1E58270900DD0C9F /* extensionUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensionUI.swift; sourceTree = "<group>"; };
 		0CFE557E1E5598D800EF0E57 /* headerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = headerView.xib; sourceTree = "<group>"; };
 		0CFE55801E55991000EF0E57 /* headerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = headerView.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			children = (
 				0C32CC731E55782000A04941 /* AppDelegate.swift */,
 				0C32CC751E55782000A04941 /* ViewController.swift */,
+				0C48A8A81E5EBF70007C9CDE /* Jason.swift */,
 				0C1624501E5C90260086B04A /* NetworkController.swift */,
 				0C1624521E5C90340086B04A /* webservices.swift */,
 				0C1624541E5C90420086B04A /* ImageInfo.swift */,
@@ -256,6 +259,7 @@
 				0C32CC8F1E558CE200A04941 /* tableViewCellTableViewCell.swift in Sources */,
 				0C32CC741E55782000A04941 /* AppDelegate.swift in Sources */,
 				0C1624531E5C90340086B04A /* webservices.swift in Sources */,
+				0C48A8A91E5EBF70007C9CDE /* Jason.swift in Sources */,
 				0CF309B01E58270900DD0C9F /* extensionUI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,6 +12,8 @@
 
 
     class ViewController: UIViewController {
+        
+    typealias JSONDictionary = [[String:Any]]
     
    // CREATING A 2D ARRAY OF THE INDEXPATH OF THE CELLS OF THE TABLEVIEW AS WELL AS TEH COLLECTION VIEW THAT HAVE bBEN SELECTED AS FAVOURITE BY THE USER BY TAPPING ON THE HEART BUTTON
     
@@ -32,10 +34,6 @@
     //  3D ARRAY OF IMAGES THAT IS BEEN FETCHED ON HITTING THE SERVICE CONTAINING THE INFORMATION ABOUT SECTION ROW AND INDEXPATH
         
     var imagesList =  [[[ImageInfo]]]()
-     
-    // ARRAY OF THE CATEGORIES OF THE SECTIONS
-        
-    var detailArray = ["BRIDES" , " MAKEUP  " , "BRANDS"]
     
     // OUTLETS
         
@@ -81,38 +79,7 @@
         
         super.didReceiveMemoryWarning()
     }
-    
-    // FUNCTION INITIALLY FETCHING AND STORING DATA INSIDE A 3D ARRAY NAMED imagesList
-    
-    func fetchData()
-     {
-        var count = 1 // KEEPING A COUNT SO THAT SAME PAGE IS NOT LOADED AGAIN AND AGAIN
-        
-        for sections in detailArray.indices {
-            
-        imagesList.append([])
-            
-            for row in 0...2{
-                
-                imagesList[sections].append([])
-                
-                Webservices().fetchDataFromPixabay(withQuery : detailArray[sections],
-                                                   page: count ,
-                                                   success : {(input : [ImageInfo]) -> Void in
-                                                    self.imagesList[sections][row] = input
-                                                    print("Hitted")
-                                                    self.tableView.reloadData()
-                },
-                                                   failure : {( error : Error) -> Void in
-                                                    print(error)
-                })
-                count = count + 1
-            }
-        }
-    }
-    
-    
-    }
+}
 
 
     // MARK: EXTENSION FOR TABLEVIEW
@@ -148,6 +115,11 @@
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCellTableViewCellID", for: indexPath) as? tableViewCellTableViewCell else {
                 fatalError(" Cell Not Found")
              }
+        
+        let dataVariable = JsonData.data[indexPath.section]["Value"] as! JSONDictionary
+        
+        cell.watchLabel.text = dataVariable[indexPath.row]["Sub Category"] as? String
+        
             return cell
         }
         
@@ -189,6 +161,8 @@
       guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerViewID") as? headerView else {
             fatalError(" Header Not Found")
         }
+        
+        header.label.text = JsonData.data[section]["Category"] as? String
         
      // EACH TIME A HEADER IS CREATED CHECKING WHETHER IS IS BEEN SELECTED TO MINIMIZE ITSELF BY ASSIGNING THE TAG TO THE BUTTON AS THE SECTION NUMBER SO THAT WE CAN KNOW WHICH SECTION'S BUTTON IS BEEN TAPPED.
         
@@ -398,6 +372,51 @@
          print(arrayOfFavourites)
 
      }
+        
+        // FUNCTION TO LOAD THE IMAGES ACCORDING TO THE CATEGORIES DEFINED INSIDE THE JASON 
+        
+        func fetchData(){
+            
+            //loop for no of section
+            for section in JsonData.data.indices
+            {
+                //initialize the data in carImageArray
+                imagesList.append([])
+                
+                //loop for no of rows
+                for (index, value) in (JsonData.data[section]["Value"] as! JSONDictionary).enumerated()
+                {
+                    imagesList[section].append([])
+                    //for calling the fetchingData
+                    Webservices().fetchDataFromPixabay(withQuery: value["Sub Category"] as! String,
+                                                       success: { (input : [ImageInfo]) in
+                                                        
+                                                        print("hitted")
+                                                        self.imagesList[section][index] = input
+                                                        
+                                                        //for genrating the alert if image not found
+                                                        if self.imagesList.count == 0{
+                                                            
+                                                            let alert = UIAlertController(title: "Alert", message: "Please Enter a valid value", preferredStyle: UIAlertControllerStyle.alert)
+                                                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                                                            self.present(alert, animated: true, completion: nil)
+                                                        }
+                                                        else{
+                                                            self.tableView.reloadData()
+                                                        }
+                                                        
+                    })
+                    {
+                        //for genrating the alert if No Network Connecti
+                        (error : Error) in
+                        let alert = UIAlertController(title: "Alert", message: "No Network Connection", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        
+                    }
+                }
+            }
+        }
     
      }
 

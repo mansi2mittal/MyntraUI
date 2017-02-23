@@ -25,5 +25,6 @@ class ImageCollectionViewCell: UICollectionViewCell {
         imageInCell.contentMode = .scaleAspectFill
 
     }
-        
+    
+    
     }
