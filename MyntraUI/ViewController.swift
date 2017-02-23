@@ -381,7 +381,6 @@
             {
                 imagesList.append([])
                 
-                //loop for no of rows
                 for (index, value) in (JsonData.entireData[section]["Value"] as! JSONDictionary).enumerated()
                 {
                     imagesList[section].append([])
