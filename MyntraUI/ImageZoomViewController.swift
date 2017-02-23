@@ -27,10 +27,16 @@ import UIKit
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // ADDING GESTURE TO THE IMAGE
+        
+        zoomedImage.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector (panImage)))
+        
+        self.view.addSubview(zoomedImage)
+        
         zoomedImage.image = zoomImg
     }
     
-    // FUNCTION TO LAYOUT SUBVIEWS WHWN THE VIEW WILL LOAD 
+    // FUNCTION TO LAYOUT SUBVIEWS WHEN THE VIEW WILL LOAD
     
     override func viewWillLayoutSubviews() {
         
@@ -43,10 +49,12 @@ import UIKit
         // Dispose of any resources that can be recreated.
     }
     
-   // CLICKING THE CLOSE BUTTON , HOME SCREEN WILL APPEAR
-    
+   
     //  MARK : ACTIONS
+    
       @IBAction func closeButton(_ sender: UIButton) {
+        
+    // CLICKING THE CLOSE BUTTON , HOME SCREEN WILL APPEAR WITH ANIMATION
         
         UIView.animate(withDuration: 0.1, animations: {
             UIView.setAnimationCurve(UIViewAnimationCurve.easeInOut)
@@ -55,9 +63,27 @@ import UIKit
 
     }
     
- 
+   // FUNCTION TO ENABLE THE PANING OF THE IMAGE THROUGHTOUT THE VIEW 
     
-    
-
-
+    func panImage(gesture : UIPanGestureRecognizer)
+    {
+            let newPointOfLocation = gesture.translation(in: self.zoomedImage)
+            print(newPointOfLocation)
+            
+            switch gesture.state {
+                
+            case .began:
+                print("began")
+                
+            case .changed:
+                
+                zoomedImage.transform = CGAffineTransform(translationX: newPointOfLocation.x, y: newPointOfLocation.y)
+                
+            case .ended:
+                print("ended")
+                
+            default:
+                break
+            }
+        }
 }

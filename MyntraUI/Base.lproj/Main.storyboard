@@ -92,14 +92,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5rm-pg-Myb">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5rm-pg-Myb">
                                 <rect key="frame" x="0.0" y="59" width="375" height="608"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sls-bJ-3eu">
-                                <rect key="frame" x="16" y="84" width="50" height="50"/>
+                                <rect key="frame" x="23" y="11" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Tty-l1-6VS"/>
-                                    <constraint firstAttribute="width" constant="50" id="gyj-04-5XX"/>
+                                    <constraint firstAttribute="width" constant="40" id="8gy-Hj-2Zt"/>
+                                    <constraint firstAttribute="height" constant="40" id="a2f-8H-7gD"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="Image"/>
                                 <connections>
@@ -112,9 +112,9 @@
                             <constraint firstItem="JBL-zr-UTF" firstAttribute="top" secondItem="5rm-pg-Myb" secondAttribute="bottom" id="21b-2d-0Ns"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5rm-pg-Myb" secondAttribute="trailing" constant="-16" id="5b1-c8-aIx"/>
                             <constraint firstItem="5rm-pg-Myb" firstAttribute="leading" secondItem="Gxq-OW-Ody" secondAttribute="leadingMargin" constant="-16" id="HNG-hq-rGb"/>
+                            <constraint firstItem="sls-bJ-3eu" firstAttribute="leading" secondItem="Gxq-OW-Ody" secondAttribute="leadingMargin" constant="7" id="SHl-Wq-Xvs"/>
+                            <constraint firstItem="5rm-pg-Myb" firstAttribute="top" secondItem="sls-bJ-3eu" secondAttribute="bottom" constant="8" id="TAC-Xa-y4X"/>
                             <constraint firstItem="5rm-pg-Myb" firstAttribute="top" secondItem="RPd-Cu-isN" secondAttribute="bottom" constant="39" id="ac2-fq-bA6"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="sls-bJ-3eu" secondAttribute="leading" id="mHE-s9-2xs"/>
-                            <constraint firstItem="sls-bJ-3eu" firstAttribute="top" secondItem="RPd-Cu-isN" secondAttribute="bottom" constant="64" id="phw-7B-auT"/>
                         </constraints>
                     </view>
                     <connections>

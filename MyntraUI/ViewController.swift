@@ -15,7 +15,7 @@
         
     typealias JSONDictionary = [[String:Any]]
     
-   // CREATING A 2D ARRAY OF THE INDEXPATH OF THE CELLS OF THE TABLEVIEW AS WELL AS TEH COLLECTION VIEW THAT HAVE bBEN SELECTED AS FAVOURITE BY THE USER BY TAPPING ON THE HEART BUTTON
+   // CREATING A 2D ARRAY OF THE INDEXPATH OF THE CELLS OF THE TABLEVIEW AS WELL AS THE COLLECTION VIEW THAT HAVE BEEN SELECTED AS FAVOURITE BY THE USER BY TAPPING ON THE HEART BUTTON
     
     var arrayOfFavourites = [[IndexPath]]()
     
@@ -230,7 +230,6 @@
         }
         
         tableView.reloadSections([sender.tag], with: .top)
-        //print(arrayOfHiddenRowsOfSection)
     }
         
     // FUNCTION TO HANDLE THE TAP ON THE MINIMIZED BUTTON
