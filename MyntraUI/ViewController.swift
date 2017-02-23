@@ -108,9 +108,9 @@
         
         
        }
-    // RETURNS THE CELL FOR THAT PARTICULAR ROW
+     // RETURNS THE CELL FOR THAT PARTICULAR ROW
         
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCellTableViewCellID", for: indexPath) as? tableViewCellTableViewCell else {
                 fatalError(" Cell Not Found")
@@ -125,7 +125,7 @@
         
        // WILL DISPLAY A PARTICULAR CELL AT A PARTICULAR INDEXPATH
         
-     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+      func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
             
             guard  let tableCell = cell as? tableViewCellTableViewCell else {  fatalError(" Cell Not Found")}
             
