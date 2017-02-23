@@ -377,10 +377,8 @@
         
         func fetchData(){
             
-            //loop for no of section
             for section in JsonData.data.indices
             {
-                //initialize the data in carImageArray
                 imagesList.append([])
                 
                 //loop for no of rows
@@ -394,7 +392,7 @@
                                                         print("hitted")
                                                         self.imagesList[section][index] = input
                                                         
-                                                        //for genrating the alert if image not found
+                                                        //ALERT IF IMAGE NOT FOUND
                                                         if self.imagesList.count == 0{
                                                             
                                                             let alert = UIAlertController(title: "Alert", message: "Please Enter a valid value", preferredStyle: UIAlertControllerStyle.alert)
@@ -407,7 +405,7 @@
                                                         
                     })
                     {
-                        //for genrating the alert if No Network Connecti
+                        //ALERT FOR NO INTERNET
                         (error : Error) in
                         let alert = UIAlertController(title: "Alert", message: "No Network Connection", preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
