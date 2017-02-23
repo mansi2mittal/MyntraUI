@@ -12,7 +12,7 @@ import UIKit
     
     // VARIABLE TO STORE THE INDEXPATH OF THE TABLECELL
     
-    var tableIndexPath : IndexPath!
+    var tableCellIndexPath : IndexPath!
     
      // OUTLETS
     

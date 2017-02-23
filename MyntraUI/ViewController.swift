@@ -108,13 +108,14 @@
         
         
        }
-     // RETURNS THE CELL FOR THAT PARTICULAR ROW
+      // RETURNS THE CELL FOR THAT PARTICULAR ROW
         
       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCellTableViewCellID", for: indexPath) as? tableViewCellTableViewCell else {
                 fatalError(" Cell Not Found")
              }
+        // SETTING THE TEXT OF THE LABEL ON EACH ROW OF THE TABLEVIEW CELL
         
         let dataVariable = JsonData.entireData[indexPath.section]["Value"] as! JSONDictionary
         
@@ -150,7 +151,7 @@
             
             tableCell.minimizeButton.addTarget(self, action: #selector(minimizeButtonTapped), for: .touchUpInside)
             
-            tableCell.tableIndexPath = indexPath
+            tableCell.tableCellIndexPath = indexPath
             
             }
     
@@ -161,6 +162,8 @@
       guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerViewID") as? headerView else {
             fatalError(" Header Not Found")
         }
+        
+        //SETTING THE TEXT ON THE HEADER AS THE CATEGORY OF THE JSON MODEL
         
         header.label.text = JsonData.entireData[section]["Category"] as? String
         
@@ -264,7 +267,7 @@
         
         let tablecell = collectionView.getTableViewCell as! tableViewCellTableViewCell
         
-        return imagesList[tablecell.tableIndexPath.section][tablecell.tableIndexPath.row].count
+        return imagesList[tablecell.tableCellIndexPath.section][tablecell.tableCellIndexPath.row].count
         
     }
     
@@ -280,7 +283,7 @@
         
         // STORING THE IMAGES OF A PARTICULAR SECTION AND ROW IN A VARIABLE
         
-        let imageInformationData = imagesList[tableViewCell.tableIndexPath.section][tableViewCell.tableIndexPath.row][indexPath.item]
+        let imageInformationData = imagesList[tableViewCell.tableCellIndexPath.section][tableViewCell.tableCellIndexPath.row][indexPath.item]
         
         if let url = URL(string: imageInformationData.previewURL) {
             
@@ -294,12 +297,12 @@
         
         // ASSIGNING THE INDEXPATH OF THE CELL SPECIFYING THE SECTION, ROW AND INDEXPATH OF THE CELL.
         
-         cell.label.text  = "\(tableViewCell.tableIndexPath!.section)  \(tableViewCell.tableIndexPath!.row)\(indexPath.row)"
+         cell.label.text  = "\(tableViewCell.tableCellIndexPath!.section)  \(tableViewCell.tableCellIndexPath!.row)\(indexPath.row)"
         
         // PERSISTING THE CELLS THAT HAVE BEEN SELECTED AS FAVOURITE
         
         if  arrayOfFavourites.contains (where:{ (index : [IndexPath]) -> Bool in
-            return index == [tableViewCell.tableIndexPath! , indexPath] })
+            return index == [tableViewCell.tableCellIndexPath! , indexPath] })
         {
             cell.heartButton.isSelected = true
         }
@@ -330,7 +333,7 @@
             {  self.navigationController?.pushViewController(ZoomedView, animated: true)
         }, completion:nil )
 
-        let imageInformationData = imagesList[tableViewCell.tableIndexPath.section][tableViewCell.tableIndexPath.row][indexPath.item]
+        let imageInformationData = imagesList[tableViewCell.tableCellIndexPath.section][tableViewCell.tableCellIndexPath.row][indexPath.item]
 
         ZoomedView.imageURL = URL(string : imageInformationData.webformatURL)
         
