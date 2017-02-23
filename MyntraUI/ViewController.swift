@@ -86,16 +86,18 @@
      {
         var count = 1 // KEEPING A COUNT SO THAT SAME PAGE IS NOT LOADED AGAIN AND AGAIN
         
-        for sect in 0...2{
+        for sections in detailArray.indices {
             
         imagesList.append([])
             
-            for _ in 0...2{
+            for row in 0...2{
                 
-                Webservices().fetchDataFromPixabay(withQuery : query,
+                imagesList[sections].append([])
+                
+                Webservices().fetchDataFromPixabay(withQuery : detailArray[sections],
                                                    page: count ,
                                                    success : {(input : [ImageInfo]) -> Void in
-                                                    self.imagesList[sect].append(input)
+                                                    self.imagesList[sections][row] = input
                                                     print("Hitted")
                                                     self.tableView.reloadData()
                 },
