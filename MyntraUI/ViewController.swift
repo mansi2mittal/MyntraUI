@@ -116,7 +116,7 @@
                 fatalError(" Cell Not Found")
              }
         
-        let dataVariable = JsonData.data[indexPath.section]["Value"] as! JSONDictionary
+        let dataVariable = JsonData.entireData[indexPath.section]["Value"] as! JSONDictionary
         
         cell.watchLabel.text = dataVariable[indexPath.row]["Sub Category"] as? String
         
@@ -162,7 +162,7 @@
             fatalError(" Header Not Found")
         }
         
-        header.label.text = JsonData.data[section]["Category"] as? String
+        header.label.text = JsonData.entireData[section]["Category"] as? String
         
      // EACH TIME A HEADER IS CREATED CHECKING WHETHER IS IS BEEN SELECTED TO MINIMIZE ITSELF BY ASSIGNING THE TAG TO THE BUTTON AS THE SECTION NUMBER SO THAT WE CAN KNOW WHICH SECTION'S BUTTON IS BEEN TAPPED.
         
@@ -377,15 +377,15 @@
         
         func fetchData(){
             
-            for section in JsonData.data.indices
+            for section in JsonData.entireData.indices
             {
                 imagesList.append([])
                 
                 //loop for no of rows
-                for (index, value) in (JsonData.data[section]["Value"] as! JSONDictionary).enumerated()
+                for (index, value) in (JsonData.entireData[section]["Value"] as! JSONDictionary).enumerated()
                 {
                     imagesList[section].append([])
-                    //for calling the fetchingData
+
                     Webservices().fetchDataFromPixabay(withQuery: value["Sub Category"] as! String,
                                                        success: { (input : [ImageInfo]) in
                                                         

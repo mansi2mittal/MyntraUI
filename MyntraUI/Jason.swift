@@ -10,7 +10,7 @@ import Foundation
 
 class JsonData {
     
-    static var data : [[String : Any ]] =
+    static var entireData : [[String : Any ]] =
         [
             [
                 
