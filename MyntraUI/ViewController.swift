@@ -32,6 +32,8 @@
     //  3D ARRAY OF IMAGES THAT IS BEEN FETCHED ON HITTING THE SERVICE CONTAINING THE INFORMATION ABOUT SECTION ROW AND INDEXPATH
         
     var imagesList =  [[[ImageInfo]]]()
+     
+    // ARRAY OF THE CATEGORIES OF THE SECTIONS
         
     var detailArray = [" dogs" , "cats" , " reptiles"]
     
@@ -71,7 +73,7 @@
         tableView.register(headerNib , forHeaderFooterViewReuseIdentifier: "headerViewID")
         
         // FUNCTION CALLING 
-        fetchData(with: "dogs")
+        fetchData()
         
     }
 
@@ -82,7 +84,7 @@
     
     // FUNCTION INITIALLY FETCHING AND STORING DATA INSIDE A 3D ARRAY NAMED imagesList
     
-    func fetchData( with query : String)
+    func fetchData()
      {
         var count = 1 // KEEPING A COUNT SO THAT SAME PAGE IS NOT LOADED AGAIN AND AGAIN
         
