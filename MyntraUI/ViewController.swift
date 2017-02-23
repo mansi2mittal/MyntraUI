@@ -128,32 +128,32 @@
         
       func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
             
-            guard  let tableCell = cell as? tableViewCellTableViewCell else {  fatalError(" Cell Not Found")}
+        guard  let tableCell = cell as? tableViewCellTableViewCell else {  fatalError(" Cell Not Found")}
             
-            // ASSIGNING THE DELEGATE AND DATASOURCES
+        // ASSIGNING THE DELEGATE AND DATASOURCES
             
-            tableCell.watchCollectionView.delegate = self
+        tableCell.watchCollectionView.delegate = self
             
-            tableCell.watchCollectionView.dataSource = self
+        tableCell.watchCollectionView.dataSource = self
             
             
-            // EACH TIME THE CELL IS LOADED CHECKING WHETHER THE PARTICULAR ROW IS ALREADY SELECTED FOR MINIMIZING TO PERSIST THE MINIMIZATION
+        // EACH TIME THE CELL IS LOADED CHECKING WHETHER THE PARTICULAR ROW IS ALREADY SELECTED FOR MINIMIZING TO PERSIST THE MINIMIZATION
             
-            if(arrayOfMinimizedRows.contains(indexPath)){
+        if(arrayOfMinimizedRows.contains(indexPath)){
                 
                 tableCell.minimizeButton.isSelected = true
-            }
-            else{
+        }
+        else{
                 tableCell.minimizeButton.isSelected = false
-            }
+        }
             
-            //ADDING TARGET ON THE MINIMIZED BUTTON TO HANDLE THE TAP ON THE ROW MINIMIZED BUTTON
+        //ADDING TARGET ON THE MINIMIZED BUTTON TO HANDLE THE TAP ON THE ROW MINIMIZED BUTTON
             
-            tableCell.minimizeButton.addTarget(self, action: #selector(minimizeButtonTapped), for: .touchUpInside)
+        tableCell.minimizeButton.addTarget(self, action: #selector(minimizeButtonTapped), for: .touchUpInside)
             
-            tableCell.tableCellIndexPath = indexPath
+        tableCell.tableCellIndexPath = indexPath
             
-            }
+        }
     
       // DEFINES THE VIEW FOR HEADER IN SECTION
         
