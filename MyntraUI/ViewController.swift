@@ -387,8 +387,6 @@
 
                     Webservices().fetchDataFromPixabay(withQuery: value["Sub Category"] as! String,
                                                        success: { (input : [ImageInfo]) in
-                                                        
-                                                        print("hitted")
                                                         self.imagesList[section][index] = input
                                                         
                                                         //ALERT IF IMAGE NOT FOUND
