@@ -35,7 +35,7 @@
      
     // ARRAY OF THE CATEGORIES OF THE SECTIONS
         
-    var detailArray = [" dogs" , "cats" , " reptiles"]
+    var detailArray = ["BRIDES" , " MAKEUP  " , "BRANDS"]
     
     // OUTLETS
         
